@@ -1,0 +1,69 @@
+@forward "env";
+
+@font-face {
+  src: url("/fonts/Manrope/Manrope-VariableFont_wght.ttf") format('truetype');
+  font-family: "Manrope";
+}
+
+@font-face {
+  src: url("/fonts/Unbounded/Unbounded-VariableFont_wght.ttf") format('truetype');
+  font-family: "Unbounded";
+}
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+
+  background-color: var(--bg-color);
+
+  color: var(--text-color);
+  font-size: 16px;
+  font-family: "Manrope", sans-serif;
+  font-display: swap;
+}
+
+.page-container {
+  max-width: 1440px;
+  width: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+a {
+  text-decoration: none;
+  color: var(--text-color);
+
+  transition-duration: var(--transition-duration);
+  transition-property: color;
+
+  &.active, &:hover {
+    color: var(--primary-color);
+  }
+
+  &.active:hover {
+    color: var(--primary-color-darker);
+  }
+}
+
+h1 {
+  font-size: 3.5rem;
+  font-family: "Unbounded", sans-serif;
+}
+
+h2 {
+  font-size: 3rem;
+  font-family: "Unbounded", sans-serif;
+}
+
+h3 {
+  font-size: 2rem;
+  font-family: "Unbounded", sans-serif;
+}
