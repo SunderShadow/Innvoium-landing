@@ -21,10 +21,12 @@
   <TeamSection />
   <ReviewsSection />
   <FAQSection />
-  <div class="bottom-figure-wrapper">
-    <svg class="bottom-page-figure" width="1440" height="1272" viewBox="0 0 1440 1272" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M404.438 418.476L0 275.531V1272H1440V0L404.438 418.476Z" fill="#811FF1"/>
-    </svg>
+  <div class="bottom-figure-section">
+    <div class="bottom-figure-wrapper">
+      <svg class="bottom-page-figure" width="1440" height="1272" viewBox="0 0 1440 1272" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M404.438 418.476L0 275.531V1272H1440V0L404.438 418.476Z" fill="#811FF1"/>
+      </svg>
+    </div>
 
     <div>
       <ContactUsSection />
@@ -37,7 +39,7 @@
     --section-padding-y: 60px;
   }
 
-  .bottom-figure-wrapper {
+  .bottom-figure-section {
     position: relative;
     > :last-child {
       position: relative;
@@ -45,10 +47,16 @@
     }
   }
 
-  .bottom-page-figure {
+  .bottom-figure-wrapper {
     position: absolute;
     left: 0;
     top: 0;
+    width: 100%;
+    max-height: 1200px;
+    overflow: hidden;
+  }
+
+  .bottom-page-figure {
     width: 100%;
     height: auto;
   }

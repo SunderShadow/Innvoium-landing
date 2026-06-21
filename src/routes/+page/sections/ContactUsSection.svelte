@@ -24,6 +24,11 @@
 </section>
 
 <style lang="scss">
+  section {
+    padding-top: var(--section-padding-y);
+    padding-bottom: var(--section-padding-y);
+  }
+
   .form-wrapper {
     --btn-width: 100%;
     background-color: var(--bg-color);
