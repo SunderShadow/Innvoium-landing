@@ -46,12 +46,31 @@ a {
   transition-duration: var(--transition-duration);
   transition-property: color;
 
+  svg {
+    *[fill] {
+      fill: #545D71;
+      transition: fill var(--transition-duration);
+    }
+  }
+
   &.active, &:hover {
     color: var(--primary-color);
+
+    svg {
+      *[fill] {
+        fill: var(--primary-color);
+      }
+    }
   }
 
   &.active:hover {
     color: var(--primary-color-darker);
+
+    svg {
+      *[fill] {
+        fill: var(--primary-color);
+      }
+    }
   }
 }
 

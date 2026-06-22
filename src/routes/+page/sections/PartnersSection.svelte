@@ -7,9 +7,9 @@
 <section id="partners" class="page-container">
   <h2>Партнеры</h2>
   <div class="partners">
-    <VenteilGroupLogo />
-    <NightLabsLogo />
-    <Boosty2BLogo />
+    <a href="https://vgarda.com/"><VenteilGroupLogo /></a>
+    <a href=""><NightLabsLogo /></a>
+    <a href=""><Boosty2BLogo /></a>
   </div>
 </section>
 
@@ -17,6 +17,7 @@
   h2 {
     margin: 0 0 60px;
   }
+
   section {
     padding-top: var(--section-padding-y);
     padding-bottom: var(--section-padding-y);
