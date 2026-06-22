@@ -14,7 +14,7 @@
   </h1>
 
   <p>Нейроворонки, чат-боты, CRM, интеграция ИИ<br>и другие цифровые сервисы</p>
-  <Button>Получить консультацию</Button>
+  <Button href="#contact-us">Получить консультацию</Button>
 </section>
 
 <style lang="scss">

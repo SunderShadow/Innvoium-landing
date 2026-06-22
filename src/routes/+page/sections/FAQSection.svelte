@@ -2,7 +2,7 @@
   let openI = $state(0)
 </script>
 
-<section class="page-container">
+<section id="FAQ" class="page-container">
   <h2>Частые вопросы</h2>
 
   <div class="content">

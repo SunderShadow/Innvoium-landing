@@ -52,7 +52,7 @@
   </figure>
 {/snippet}
 
-<section class="page-container">
+<section id="team" class="page-container">
   <div class="header">
     <h2>Команда</h2>
     <div>все проекты делали эти <span>люди</span></div>

@@ -2,7 +2,7 @@
   import Button from "$lib/components/Button.svelte"
 </script>
 
-<section>
+<section id="contact-us">
   <div class="form-wrapper">
     <h2>Свяжитесь с нами</h2>
     <p>Наш менеджер проконсультирует вас по любому вопросу в течении 24 часов</p>
