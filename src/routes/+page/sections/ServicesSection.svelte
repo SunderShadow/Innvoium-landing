@@ -6,6 +6,8 @@
 
   const splideOptions: Options = {
     type: 'loop',
+    autoplay: true,
+    interval: 3000,
     perPage: 3,
     gap: 30,
     breakpoints: {
@@ -63,6 +65,7 @@
 </section>
 
 <style lang="scss">
+  @use "$lib/scss/mixins/scr";
   @use "$lib/scss/env";
 
   section {
@@ -87,6 +90,8 @@
     .splide__pagination {
       gap: 10px;
       margin-top: 20px;
+      margin-left: 0;
+      padding-left: 0;
     }
 
     .splide__arrows {
@@ -143,9 +148,19 @@
 
       cursor: pointer;
 
+      display: block;
       transition-duration: var(--transition-duration);
-      transition-property: background-color;
+      transition-property: outline, background-color;
+      outline: 2px solid transparent;
 
+      @include scr.tablet-and-lower {
+        width: 12px;
+        height: 12px;
+
+        &.is-active {
+          outline-color: var(--primary-color);
+        }
+      }
       &:hover {
         background-color: var(--primary-color);
       }
