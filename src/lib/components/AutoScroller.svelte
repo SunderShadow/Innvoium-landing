@@ -12,7 +12,7 @@
   let {
     velocity = 1,
     children
-  } = $props()
+  }: Props = $props()
 
   let container: HTMLElement = $state()!
 
@@ -117,7 +117,7 @@
     role="contentinfo"
     class="auto-scroller"
     bind:this={container}
-    ontouchstart={handleMouseTouch}
+    ontouchstart={stopAutoScroll}
     ontouchend={startAutoScroll}
     onscroll={infiniteScroll}
     onmouseenter={stopAutoScroll}
