@@ -12,6 +12,12 @@
   }
 }
 
+@mixin laptop-and-higher {
+  @media (min-width: 1024px) {
+    @content;
+  }
+}
+
 @mixin tablet {
   @media (max-width: 1024px) and (min-width: 390px) {
     @content;

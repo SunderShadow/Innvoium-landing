@@ -39,8 +39,14 @@
 </main>
 
 <style lang="scss">
+  @use "$lib/scss/mixins/scr";
+
   main {
     --section-padding-y: 60px;
+
+    @include scr.tablet-and-lower {
+      --section-padding-y: 40px;
+    }
   }
 
   .bottom-figure-section {

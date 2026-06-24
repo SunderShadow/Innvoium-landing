@@ -1,3 +1,5 @@
+@use "$lib/scss/mixins/scr";
+
 @forward "env";
 
 @font-face {
@@ -28,6 +30,10 @@ html, body {
   font-display: swap;
 
   scroll-behavior: smooth;
+
+  @include scr.tablet {
+    font-size: 12px;
+  }
 }
 
 .page-container {
@@ -89,4 +95,14 @@ h3 {
   font-size: 2rem;
   font-weight: 600;
   font-family: "Unbounded", sans-serif;
+}
+
+@include scr.tablet-and-lower {
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
 }

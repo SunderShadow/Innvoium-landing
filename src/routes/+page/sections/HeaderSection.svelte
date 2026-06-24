@@ -1,5 +1,6 @@
 <script lang="ts">
   import bgImgDesktop from "../assets/header-section-bg.png?enhanced&format=webp"
+  import bgImgMobile from "../assets/header-section-bg-mobile.png?enhanced&format=webp"
   import Button from "$lib/components/Button.svelte"
   import * as Form from "$lib/components/Form.svelte"
 </script>
@@ -8,7 +9,7 @@
   <link rel="preload" as="image" href={bgImgDesktop.img.src} fetchpriority="high">
 </svelte:head>
 
-<section class="page-container" id="header-section" style:--bg-img-desktop="url('{bgImgDesktop.img.src}')">
+<section class="page-container" id="header-section" style:--bg-img-desktop="url('{bgImgDesktop.img.src}')" style:--bg-img-mobile="url('{bgImgMobile.img.src}')">
   <h1>
     Автоматизируем рутину вашего бизнеса за 30 дней<br>
     <span>от анализа до запуска под ключ</span>
@@ -44,6 +45,7 @@
 
 <style lang="scss">
   @use "$lib/scss/env";
+  @use "$lib/scss/mixins/scr";
 
   section {
     position: relative;
@@ -53,11 +55,27 @@
     padding-top: 100px;
 
     --btn-width: 412px;
+
+    @include scr.tablet-and-lower {
+      background-image: var(--bg-img-mobile);
+      background-size: cover;
+      background-position: top left;
+      padding-top: 40px;
+      --btn-width: 172px;
+      --btn-padding-y: 8px;
+    }
   }
 
-  p {
+  section > p {
     margin-top: 46px;
     margin-bottom: 46px;
+
+    @include scr.tablet-and-lower {
+      max-width: 211px;
+      br {
+        display: none;
+      }
+    }
   }
 
   h1 {
@@ -71,28 +89,40 @@
       font-weight: 400;
       margin-top: 20px;
       color: var(--primary-color);
+
+      @include scr.tablet-and-lower {
+        font-size: 20px;
+      }
     }
   }
 
   form {
     --btn-width: 100%;
 
-    position: absolute;
-    right: 142px;
-    top: 50%;
-    transform: translateY(-50%);
+    @include scr.laptop-and-higher {
+      position: absolute;
+      right: 142px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 390px;
+    }
 
     display: flex;
     flex-direction: column;
     gap: 20px;
 
-    width: 390px;
     padding: 30px;
 
     background-color: rgba(#FAC9FF, .25);
     border-radius: 30px;
     border: 1px solid #D3D3D3;
     backdrop-filter: blur(8px);
+
+
+    @include scr.tablet-and-lower {
+      margin-top: 40px;
+      gap: 12px;
+    }
 
     .input {
       position: relative;
@@ -142,6 +172,7 @@
         transform: translateY(-50%);
       }
     }
+
     h2, p {
       margin: 0;
     }
@@ -149,6 +180,10 @@
     h2 {
       font-size: 24px;
       text-align: center;
+
+      @include scr.tablet-and-lower {
+        font-size: 20px
+      }
     }
 
     p {

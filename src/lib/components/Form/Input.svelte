@@ -27,6 +27,7 @@
 </div>
 
 <style lang="scss">
+  @use "$lib/scss/mixins/scr";
   @use "$lib/scss/env";
 
   .input {
@@ -79,6 +80,10 @@
       border: 1px solid transparent;
       outline: none;
       font: inherit;
+
+      @include scr.tablet-and-lower {
+        padding: 12px 20px;
+      }
 
       background-color: var(--input-bg-color, #FFF);
 
