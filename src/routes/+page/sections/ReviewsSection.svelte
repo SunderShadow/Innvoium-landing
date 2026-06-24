@@ -17,7 +17,7 @@
     spanHTML.style.display = 'inline-block'
     function timingFunc(distance: number) {
       spanHTML.style.transform = `rotate(${-Math.ceil(distance / 100) * 5}deg)`
-      return initVelocity + Math.ceil(distance / 100) * 2
+      return initVelocity + Math.ceil(distance / 100) * 3
     }
 
     function move(e: MouseEvent) {
@@ -48,6 +48,49 @@
     window.addEventListener('mousemove', move)
   }
 
+  function handlePrikolMobile(e: TouchEvent) {
+    e.stopPropagation()
+
+    document.body.style.setProperty('overscroll-behavior-x', 'none')
+    const initX = e.touches[0].clientX
+    const initVelocity = autoScrollerVelocity
+
+    const spanHTML: HTMLElement = e.target!
+    spanHTML.style.display = 'inline-block'
+    function timingFunc(distance: number) {
+      spanHTML.style.transform = `rotate(${-Math.ceil(distance / 100) * 5}deg)`
+      return initVelocity + Math.ceil(distance / 100) * 3
+    }
+
+    function move(e: TouchEvent) {
+      const moveDistance = e.touches[0].clientX - initX
+      autoScrollerVelocity = timingFunc(moveDistance)
+    }
+
+    function end(e: TouchEvent) {
+      autoScrollerVelocity = initVelocity
+      spanHTML.style.transition = 'transform 500ms cubic-bezier(0.42, 0, 0.11, 2.5)'
+      spanHTML.style.removeProperty('transform')
+
+      document.body.style.removeProperty('overscroll-behavior-x')
+
+      spanHTML.addEventListener('transitionend', () => {
+        spanHTML.style.removeProperty('display')
+        spanHTML.style.removeProperty('transition')
+      }, {once: true})
+      spanHTML.addEventListener('transitioncancel', () => {
+        spanHTML.style.removeProperty('display')
+        spanHTML.style.removeProperty('transition')
+      }, {once: true})
+
+      window.removeEventListener('touchmove', move)
+      window.removeEventListener('touchend', end)
+      document.body.style.removeProperty('cursor')
+    }
+
+    window.addEventListener('touchmove', move)
+    window.addEventListener('touchend', end)
+  }
 </script>
 
 {#snippet comment()}
@@ -71,7 +114,7 @@
   </article>
 {/snippet}
 <section class="page-container">
-  <h2>Отзывы наших кли<span onmousedown={handlePrikol}>е</span>нтов</h2>
+  <h2>Отзывы наших кли<span onmousedown={handlePrikol} ontouchstart={handlePrikolMobile}>е</span>нтов</h2>
 
   <div class="content">
     <AutoScroller velocity={autoScrollerVelocity}>
@@ -97,6 +140,11 @@
   section {
     padding-top: var(--section-padding-y);
     padding-bottom: var(--section-padding-y);
+  }
+
+  // Prikol
+  h2 > span  {
+    overscroll-behavior-x: none ;
   }
   section > .content {
     display: flex;
