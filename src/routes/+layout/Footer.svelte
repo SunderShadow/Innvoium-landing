@@ -73,12 +73,14 @@
     </div>
 
     <p class="copyright">
-      © 2026 Инновиум
+      © {new Date().getFullYear()} Инновиум
     </p>
   </div>
 </footer>
 
 <style lang="scss">
+  @use "$lib/scss/mixins/scr";
+
   footer {
     padding-top: 60px;
     padding-bottom: 60px;
@@ -87,11 +89,21 @@
 
     position: relative;
     z-index: 2;
+
+    @include scr.tablet-and-lower {
+      padding-top: 40px;
+      padding-bottom: 40px;
+    }
   }
 
   .info-links {
     display: flex;
-    justify-content:  space-between;
+    justify-content: space-between;
+    @include scr.tablet-and-lower {
+      flex-direction: column;
+      gap: 30px;
+
+    }
 
     > section {
       width: 310px;
@@ -100,6 +112,7 @@
       h3 {
         font-size: 18px;
         font-family: Manrope, sans-serif;
+        margin-top: 0;
       }
       p {
         margin: 0;
@@ -124,11 +137,19 @@
     margin-top: 20px;
     margin-bottom: 40px;
     opacity: .5;
+    @include scr.tablet-and-lower {
+      margin-bottom: 30px;
+      margin-top: 30px;
+    }
   }
+
   .header {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
   }
+
   .logo :global svg {
     width: 278px;
     height: auto;
@@ -150,12 +171,23 @@
       border-radius: 100rem;
       width: 40px;
       height: 40px;
+
+      svg {
+        *[fill] {
+          fill: var(--primary-color);
+        }
+      }
     }
   }
 
   .copyright {
-    text-align: center;
+    text-align: right;
     margin-top: 40px;
+    font-weight: 700;
     color: #FFF;
+
+    @include scr.tablet-and-lower {
+      text-align: left;
+    }
   }
 </style>

@@ -41,6 +41,8 @@
 </section>
 
 <style lang="scss">
+  @use "$lib/scss/mixins/scr";
+
   section {
     padding-top: var(--section-padding-y);
     padding-bottom: var(--section-padding-y);
@@ -58,6 +60,9 @@
     margin-left: auto;
     margin-right: auto;
 
+    @include scr.tablet-and-lower {
+      border: none;
+    }
 
     h2 {
       margin: 0;
@@ -76,6 +81,10 @@
     font-size: 18px;
 
     --input-bg-color: var(--block-bg-color);
+    @include scr.tablet-and-lower {
+      background-color: var(--bg-color);
+      font-size: inherit;
+    }
   }
 
   .policy {

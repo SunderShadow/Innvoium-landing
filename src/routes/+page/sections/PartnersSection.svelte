@@ -33,5 +33,9 @@
   a {
     display: flex;
     align-items: center;
+    :global svg {
+      max-width: 80px;
+      height: auto;
+    }
   }
 </style>

@@ -9,9 +9,14 @@
     perPage: 3,
     gap: 30,
     breakpoints: {
-      393: {
-        perPage: 1,
+      1024: {
+        perPage: 2,
+      },
+      700: {
         arrows: false
+      },
+      550: {
+        perPage: 1,
       }
     }
   }

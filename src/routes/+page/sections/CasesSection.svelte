@@ -131,6 +131,7 @@
 </section>
 
 <style lang="scss">
+  @use "$lib/scss/mixins/scr";
   @use "$lib/scss/env";
 
   section {
@@ -228,6 +229,10 @@
   section > .content {
     display: flex;
     gap: 30px;
+
+    @include scr.tablet-and-lower {
+      flex-direction: column;
+    }
   }
 
   h2 {

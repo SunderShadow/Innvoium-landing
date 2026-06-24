@@ -47,9 +47,16 @@
 </section>
 
 <style lang="scss">
+  @use "$lib/scss/mixins/scr";
+
   section > .content {
     display: flex;
     gap: 30px;
+
+    @include scr.tablet-and-lower {
+      flex-direction: column;
+      gap: 40px;
+    }
   }
 
   section {
@@ -85,22 +92,29 @@
       p {
         margin-top: 20px;
         height: 110px;
+
+        @include scr.tablet-and-lower {
+          height: 207px;
+        }
       }
     }
   }
 
   .contact {
     flex-shrink: 0;
-    width: 390px;
     height: fit-content;
     background-color: var(--primary-color);
     padding: 30px;
     border-radius: 30px;
 
-    font-size: 20px;
     color: #FFF;
 
     line-height: 1.7;
+
+    @include scr.laptop-and-higher {
+      width: 390px;
+      font-size: 20px;
+    }
 
     h3 {
       margin: 0;
@@ -114,8 +128,17 @@
       > a {
         display: flex;
         background-color: #FFF;
-        padding: 12px;
         border-radius: 10rem;
+        padding: 10px;
+        align-items: center;
+        justify-content: center;
+
+        width: 60px;
+        height: 60px;
+        @include scr.tablet-and-lower {
+          width: 40px;
+          height: 40px;
+        }
       }
     }
   }

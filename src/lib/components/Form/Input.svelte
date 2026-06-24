@@ -95,9 +95,11 @@
       right: 20px;
       top: 50%;
       transform: translateY(-50%);
+      height: 1em;
 
       :global svg {
         display: block;
+        height: 100%;
       }
     }
   }

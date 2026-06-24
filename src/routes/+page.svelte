@@ -46,6 +46,10 @@
 
     @include scr.tablet-and-lower {
       --section-padding-y: 40px;
+
+      :global section > h2:first-child {
+        margin-bottom: 40px;
+      }
     }
   }
 

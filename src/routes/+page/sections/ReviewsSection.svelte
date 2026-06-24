@@ -114,7 +114,7 @@
   </article>
 {/snippet}
 <section class="page-container">
-  <h2>Отзывы наших кли<span onmousedown={handlePrikol} ontouchstart={handlePrikolMobile}>е</span>нтов</h2>
+  <h2>Отзывы кли<span onmousedown={handlePrikol} ontouchstart={handlePrikolMobile}>е</span>нтов и партнеровнтов</h2>
 
   <div class="content">
     <AutoScroller velocity={autoScrollerVelocity}>
@@ -137,6 +137,8 @@
 </section>
 
 <style lang="scss">
+  @use "$lib/scss/mixins/scr";
+
   section {
     padding-top: var(--section-padding-y);
     padding-bottom: var(--section-padding-y);
@@ -163,6 +165,10 @@
 
     background-color: var(--block-bg-color);
     border-radius: 30px;
+
+    @include scr.tablet-and-lower {
+      padding: 20px;
+    }
     .header {
       display: flex;
       align-items: center;
@@ -202,5 +208,9 @@
     margin-left: auto;
     margin-right: auto;
     margin-top: 60px;
+
+    @include scr.tablet-and-lower {
+      margin-top: 40px;
+    }
   }
 </style>
