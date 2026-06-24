@@ -21,15 +21,32 @@
 </section>
 
 <style lang="scss">
+  @use "$lib/scss/mixins/scr";
+
   section {
     padding-top: var(--section-padding-y);
     padding-bottom: var(--section-padding-y);
   }
+
+  section > .content {
+    @include scr.tablet-and-lower {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+    }
+  }
+
   .section-item {
+    position: relative;
     padding: 30px;
     display: flex;
     align-items: center;
     gap: 60px;
+
+    @include scr.tablet-and-lower {
+      padding: 0;
+    }
 
     .numerator {
       width: 3ex;
@@ -38,6 +55,15 @@
       font-weight: 600;
       font-family: "Unbounded", sans-serif;
       opacity: .2;
+
+      @include scr.tablet-and-lower {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        font-size: 40px;
+        opacity: .1;
+        margin-bottom: 16px;
+      }
     }
 
     .content {
@@ -52,6 +78,10 @@
         margin: 16px 0 0;
 
         color: var(--text-content-color);
+
+        @include scr.tablet-and-lower {
+          max-width: 253px;
+        }
       }
 
       hr {
@@ -62,16 +92,21 @@
         margin-top: 16px;
         margin-bottom: 0;
         background-color: var(--primary-color);
+        @include scr.tablet-and-lower {
+          max-width: 140px;
+        }
       }
     }
 
-    &.right {
-      flex-direction: row-reverse;
-      text-align: right;
+    @include scr.laptop-and-higher {
+      &.right {
+        flex-direction: row-reverse;
+        text-align: right;
 
-      .content hr {
-        margin-right: 0;
-        margin-left: auto;
+        .content hr {
+          margin-right: 0;
+          margin-left: auto;
+        }
       }
     }
   }
