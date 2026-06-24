@@ -1,0 +1,31 @@
+// scr - Screen
+
+@mixin desktop {
+  @media (min-width: 1336px) {
+    @content;
+  }
+}
+
+@mixin laptop {
+  @media (max-width: 1336px) and (min-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: 1024px) and (min-width: 390px) {
+    @content;
+  }
+}
+
+@mixin tablet-and-lower {
+  @media (max-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin phone {
+  @media (max-width: 390px) {
+    @content;
+  }
+}
