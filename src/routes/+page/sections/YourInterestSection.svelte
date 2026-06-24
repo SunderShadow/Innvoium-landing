@@ -59,6 +59,8 @@
 </section>
 
 <style lang="scss">
+  @use "$lib/scss/mixins/scr";
+
   section {
     padding-top: var(--section-padding-y);
     padding-bottom: var(--section-padding-y);
@@ -78,6 +80,12 @@
     gap: 30px;
     max-width: 1150px;
 
+    @include scr.tablet-and-lower {
+      align-items: flex-start;
+      svg {
+        width: 70px;
+      }
+    }
     svg {
       flex-shrink: 0;
     }

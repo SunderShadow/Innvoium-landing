@@ -9,7 +9,7 @@
   <link rel="preload" as="image" href={bgImgDesktop.img.src} fetchpriority="high">
 </svelte:head>
 
-<section class="page-container" id="header-section" style:--bg-img-desktop="url('{bgImgDesktop.img.src}')" style:--bg-img-mobile="url('{bgImgMobile.img.src}')">
+  <section class="page-container" id="header-section" style:--bg-img-desktop="url('{bgImgDesktop.img.src}')" style:--bg-img-mobile="url('{bgImgMobile.img.src}')">
   <h1>
     Автоматизируем рутину вашего бизнеса за 30 дней<br>
     <span>от анализа до запуска под ключ</span>

@@ -8,6 +8,12 @@
     type: 'loop',
     perPage: 3,
     gap: 30,
+    breakpoints: {
+      393: {
+        perPage: 1,
+        arrows: false
+      }
+    }
   }
 </script>
 
