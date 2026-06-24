@@ -2,97 +2,112 @@
   import type {Snippet} from "svelte"
 
   export type Props = {
-    rtl?: boolean
+    velocity?: number
     children: Snippet
   }
 </script>
 <script lang="ts">
   import {onMount} from "svelte"
 
+  let {
+    velocity = 1,
+    children
+  } = $props()
+
   let container: HTMLElement = $state()!
 
-  const gap = 30 //px
+  let gap = 30 //px
 
-  // Инициализируется в onMount
-  let itemWidth: number = 0 //px
-  // Инициализируется в onMount
-  let scrollOffset = 0 // px
-  let scrollRtlOffset = 0 // px
-
-  let currentScroll = 0
-  const scrollPerSec = 1 //px
-
-  let autoScroll = false
-
-  function startAutoScroll() {
-    if (autoScroll) return
-
-    autoScroll = true
-    scrollMembers()
-  }
-
-  let {
-    rtl = false,
-    children
-  }: Props = $props()
+  let autoScrollRun = false
 
   function infiniteScroll() {
-    if (container.scrollLeft <= scrollOffset) {
-      const destination = scrollOffset - container.scrollLeft
-      const lastItem = container.lastElementChild!
-      const cloneLastItem = lastItem.cloneNode(true)
-      container.prepend(cloneLastItem)
-      lastItem.remove()
+    if (container.getBoundingClientRect().left < nextLeftEl.getBoundingClientRect().right + gap) {
+      const lastChild = getContainerChildNodes()[getContainerChildNodes().length - 1]
 
-      requestAnimationFrame(() => {
-        container.scrollTo({left: scrollOffset * 2 - destination})
-      })
+      calcSkipDistance()
+      calcNextElementsWidth()
+
+      let scrollWidth = container.scrollLeft + lastChild.offsetWidth + gap
+
+      container.prepend(lastChild.cloneNode(true))
+      lastChild.remove()
+
+      container.scrollTo({left: scrollWidth})
+    } else if (container.getBoundingClientRect().right > nextRightEl.getBoundingClientRect().right + gap) {
+      const firstChild = getContainerChildNodes()[0]
+
+      calcSkipDistance()
+      calcNextElementsWidth()
+
+      let scrollWidth = container.scrollLeft - firstChild.offsetWidth - gap
+
+      container.append(firstChild.cloneNode(true))
+      firstChild.remove()
+
+      container.scrollTo({left: scrollWidth})
     }
+  }
 
-    if (container.scrollLeft >= scrollOffset * 3) {
-      const destination = container.scrollLeft - scrollOffset * 3
-      const firstItem = container.querySelector(':first-child')!
-      const cloneFirstItem = firstItem.cloneNode(true)
-      container.append(cloneFirstItem)
-      firstItem.remove()
+  function calcAutoScroll() {
+    if (!autoScrollRun) return
 
-      requestAnimationFrame(() => {
-        container.scrollTo({left: scrollOffset * 2 + destination})
-      })
-    }
+    container.scrollTo({left: container.scrollLeft - velocity})
+
+    requestAnimationFrame(calcAutoScroll)
+  }
+
+  function startAutoScroll() {
+    autoScrollRun = true
+    requestAnimationFrame(calcAutoScroll)
   }
 
   function stopAutoScroll() {
-    autoScroll = false
+    autoScrollRun = false
   }
 
-  function scrollMembers() {
-    if (!autoScroll) return
+  function getContainerChildNodes(): HTMLElement[] {
+    // @ts-ignore
+    return container.childNodes.values().filter(it => it.nodeType == Node.ELEMENT_NODE).toArray()
+  }
 
-    if (rtl) {
-      currentScroll = container.scrollLeft - scrollPerSec
-    } else {
-      currentScroll = container.scrollLeft + scrollPerSec
+  const skipElementsCount = 2
+  let skippedDistance = 0
+  function calcSkipDistance() {
+    skippedDistance = 0
+    for (let i = 0; i < skipElementsCount; i++) {
+      skippedDistance += getContainerChildNodes()[i].offsetWidth + gap
     }
-    container.scrollTo({left: currentScroll})
-    requestAnimationFrame(scrollMembers)
+  }
+
+  let nextLeftEl: HTMLElement
+  let nextRightEl: HTMLElement
+  function calcNextElementsWidth() {
+    const childNodes = getContainerChildNodes()
+    nextLeftEl = childNodes[skipElementsCount - 1]
+
+    let accumulatedWidth = 0
+    for (let i = skipElementsCount; i < childNodes.length; i++) {
+      accumulatedWidth += childNodes[i].offsetWidth
+
+      if (container.offsetWidth <= accumulatedWidth) {
+        nextRightEl = childNodes[i - skipElementsCount + 1]
+        return
+      }
+    }
   }
 
   onMount(() => {
-    itemWidth = container.querySelector(':first-child')!.offsetWidth
-    scrollOffset = itemWidth + gap
+    gap = Number(getComputedStyle(container).gap.slice(0, -2))
 
-    if (rtl) {
-      container.scrollTo({left: scrollOffset * 2})
-      currentScroll = container.scrollLeft
+    let childNodes = getContainerChildNodes()
+    for (let i = 0; i < childNodes.length; i++) {
+      container.append(childNodes[i].cloneNode(true))
     }
 
-    const itemsToAdd = Math.max(0, Math.ceil(container.offsetWidth / itemWidth) + 4 - container.childElementCount)
-    // @ts-ignore
-    const childElements = container.childNodes.values().filter(it => it.nodeType !== Node.COMMENT_NODE).toArray()
-    for (let i = 0; i < itemsToAdd; i++) {
-      container.append(childElements[i].cloneNode(true))
-    }
+    childNodes = getContainerChildNodes()
+    calcSkipDistance()
+    calcNextElementsWidth()
+    container.scrollTo({left: skippedDistance})
 
     startAutoScroll()
   })
@@ -102,7 +117,7 @@
     role="contentinfo"
     class="auto-scroller"
     bind:this={container}
-    ontouchstart={stopAutoScroll}
+    ontouchstart={handleMouseTouch}
     ontouchend={startAutoScroll}
     onscroll={infiniteScroll}
     onmouseenter={stopAutoScroll}
@@ -120,6 +135,10 @@
     width: 100%;
     overflow: scroll;
     scrollbar-width: none;
+
+    :global > * {
+      flex-shrink: 0;
+    }
     &::-webkit-scrollbar {
       display: none;
     }

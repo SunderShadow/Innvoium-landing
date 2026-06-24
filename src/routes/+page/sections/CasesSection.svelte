@@ -166,6 +166,7 @@
 
     h3 {
       font-size: 1rem;
+      font-weight: 400;
       margin: 0;
     }
 
@@ -193,6 +194,7 @@
 
     h3 {
       font-size: 1.25rem;
+      font-weight: 500;
       margin-bottom: 20px;
       height: 2em;
     }

@@ -58,7 +58,7 @@
     <div>все проекты делали эти <span>люди</span></div>
   </div>
 
-  <AutoScroller rtl>
+  <AutoScroller velocity={-1}>
     {#each members as member, i (i)}
       {@render memberCard(member.img, member.name, member.position)}
     {/each}

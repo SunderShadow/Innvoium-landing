@@ -11,13 +11,17 @@
   import ContactUsSection from "./+page/sections/ContactUsSection.svelte"
 </script>
 
+<svelte:head>
+  <title>Инновиум</title>
+</svelte:head>
+
 <main>
   <HeaderSection />
-  <PartnersSection />
   <YourInterestSection />
   <ServicesSection />
   <WorkProcessSection />
   <CasesSection />
+  <PartnersSection />
   <TeamSection />
   <ReviewsSection />
   <FAQSection />

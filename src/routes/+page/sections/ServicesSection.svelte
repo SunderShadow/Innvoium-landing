@@ -8,7 +8,6 @@
     type: 'loop',
     perPage: 3,
     gap: 30,
-    arrows: false
   }
 </script>
 
@@ -73,11 +72,57 @@
   }
 
   #services :global {
+
     .splide__pagination {
       gap: 10px;
       margin-top: 20px;
     }
 
+    .splide__arrows {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+      z-index: 2;
+
+      .splide__arrow {
+        background-color: #FFF;
+        border-radius: 10rem;
+        width: 60px;
+        height: 60px;
+        border: none;
+        cursor: pointer;
+
+        svg {
+          width: 15px;
+
+          transition: fill var(--transition-duration);
+        }
+
+        transition: background-color var(--transition-duration);
+
+        &:hover {
+          background-color: rgba(env.$primary-color, .5);
+
+          svg {
+            fill: #FFF;
+          }
+        }
+        &:active {
+          background-color: rgba(env.$primary-color, .75);
+        }
+      }
+      .splide__arrow--prev {
+        transform: translateX(-50%) rotate(180deg);
+      }
+
+      .splide__arrow--next {
+        transform: translateX(50%);
+      }
+    }
     .splide__pagination__page {
       width: 20px;
       height: 20px;

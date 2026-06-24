@@ -3,6 +3,51 @@
   import AutoScroller from "$lib/components/AutoScroller.svelte"
   import Button from "$lib/components/Button.svelte"
 
+  let autoScrollerVelocity = $state(1)
+  function handlePrikol(e: MouseEvent) {
+    e.preventDefault()
+    e.stopPropagation()
+
+    document.body.style.setProperty('cursor', 'ew-resize')
+
+    const initX = e.clientX
+    const initVelocity = autoScrollerVelocity
+
+    const spanHTML: HTMLElement = e.target!
+    spanHTML.style.display = 'inline-block'
+    function timingFunc(distance: number) {
+      spanHTML.style.transform = `rotate(${-Math.ceil(distance / 100) * 5}deg)`
+      return initVelocity + Math.ceil(distance / 100) * 2
+    }
+
+    function move(e: MouseEvent) {
+      const moveDistance = e.clientX - initX
+      autoScrollerVelocity = timingFunc(moveDistance)
+    }
+
+    function end(e: MouseEvent) {
+      autoScrollerVelocity = initVelocity
+      spanHTML.style.transition = 'transform 500ms cubic-bezier(0.42, 0, 0.11, 2.5)'
+      spanHTML.style.removeProperty('transform')
+
+      spanHTML.addEventListener('transitionend', () => {
+        spanHTML.style.removeProperty('display')
+        spanHTML.style.removeProperty('transition')
+      }, {once: true})
+      spanHTML.addEventListener('transitioncancel', () => {
+        spanHTML.style.removeProperty('display')
+        spanHTML.style.removeProperty('transition')
+      }, {once: true})
+
+      window.removeEventListener('mousemove', move)
+      window.removeEventListener('mouseup', end)
+      document.body.style.removeProperty('cursor')
+    }
+
+    window.addEventListener('mouseup', end)
+    window.addEventListener('mousemove', move)
+  }
+
 </script>
 
 {#snippet comment()}
@@ -26,16 +71,16 @@
   </article>
 {/snippet}
 <section class="page-container">
-  <h2>Отзывы наших клиентов</h2>
+  <h2>Отзывы наших кли<span onmousedown={handlePrikol}>е</span>нтов</h2>
 
   <div class="content">
-    <AutoScroller>
+    <AutoScroller velocity={autoScrollerVelocity}>
       {@render comment()}
       {@render comment()}
       {@render comment()}
       {@render comment()}
     </AutoScroller>
-    <AutoScroller rtl>
+    <AutoScroller velocity={-autoScrollerVelocity}>
       {@render comment()}
       {@render comment()}
       {@render comment()}

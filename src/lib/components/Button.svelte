@@ -36,6 +36,7 @@
 
     text-align: center;
 
+    outline: 4px solid transparent;
     padding: var(--btn-padding-y, 16px) var(--btn-padding-x, 20px);
 
     border: 2px solid var(--color);
@@ -50,7 +51,12 @@
     cursor: pointer;
 
     transition-duration: var(--transition-duration);
-    transition-property: background-color, color, background-color;
+    transition-property: background-color, color, background-color, border-color, outline;
+
+    &:focus {
+      border-color: #fff;
+      outline-color: var(--color);
+    }
 
     &.outline {
       color: var(--color);
