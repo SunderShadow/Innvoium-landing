@@ -27,6 +27,8 @@
 
 
 <style lang="scss">
+  @use "$lib/scss/mixins/scr";
+
   a, button {
     display: block;
     --color: var(--btn-color, var(--primary-color));
@@ -39,6 +41,9 @@
     outline: 4px solid transparent;
     padding: var(--btn-padding-y, 16px) var(--btn-padding-x, 20px);
 
+    @include scr.tablet-and-lower {
+      padding: var(--btn-padding-y, 12px) var(--btn-padding-x, 18px);
+    }
     border: 2px solid var(--color);
 
     border-radius: 100rem;

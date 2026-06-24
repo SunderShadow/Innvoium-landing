@@ -187,6 +187,10 @@
           font-size: 20px;
           font-family: Manrope;
           margin: 0;
+          @include scr.tablet-and-lower {
+            font-weight: 700;
+            font-size: 16px;
+          }
         }
       }
 
