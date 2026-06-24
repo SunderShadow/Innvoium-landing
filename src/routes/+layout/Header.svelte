@@ -102,6 +102,13 @@
 
   .logo {
     flex-shrink: 0;
+
+    @include scr.tablet-and-lower {
+      :global svg {
+        width: 148px;
+        height: auto;
+      }
+    }
   }
 
   #mobile-menu-btn {
