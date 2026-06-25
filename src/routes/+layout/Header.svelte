@@ -30,7 +30,9 @@
   }
   let mobileMenuOpened = $state(false)
   onMount(() => {
-    menu.style.setProperty('display', 'none')
+    if (window.screen.width < 1024) {
+      menu.style.setProperty('display', 'none')
+    }
   })
 </script>
 
