@@ -46,6 +46,10 @@
   section {
     padding-top: var(--section-padding-y);
     padding-bottom: var(--section-padding-y);
+
+    @include scr.tablet-and-lower {
+
+    }
   }
 
   .form-wrapper {
@@ -82,7 +86,6 @@
 
     --input-bg-color: var(--block-bg-color);
     @include scr.tablet-and-lower {
-      background-color: var(--bg-color);
       font-size: inherit;
     }
   }

@@ -92,6 +92,8 @@
 
     p {
       margin-top: 15px;
+      line-height: 1.7;
+      color: var(--text-content-color);
     }
 
     h3 {

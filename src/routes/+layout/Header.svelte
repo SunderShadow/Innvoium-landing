@@ -3,19 +3,11 @@
   import Button from "$lib/components/Button.svelte"
   import {onMount} from "svelte"
 
-  let windowIsMobile = $state(false)
-  onMount(() => {
-    window.addEventListener('resize', () => {
-      windowIsMobile = window.screen.width <= 1024
-    })
-    windowIsMobile = window.screen.width <= 1024
-  })
-
   let menu: HTMLElement = $state()!
   function removeMenuIfClosed(e: TransitionEvent) {
     if (e.propertyName == 'background-color') {
       if (!mobileMenuOpened) {
-        e.currentTarget.style.setProperty('display', 'none')
+        menu.style.setProperty('display', 'none')
       }
     }
   }
@@ -37,6 +29,9 @@
     }
   }
   let mobileMenuOpened = $state(false)
+  onMount(() => {
+    menu.style.setProperty('display', 'none')
+  })
 </script>
 
 <header>
@@ -59,12 +54,12 @@
           <a href="#services">Услуги</a>
           <a href="#cases">Кейсы</a>
           <a href="#team">Команда</a>
-          <a href="#FAQ">FAQ</a>
+          <a href="#FAQ">Вопросы</a>
         </nav>
 
         <div class="contact-data">
           <a href="tel:+79996976896">+7 (999) 697-68-96</a>
-          <Button outline={windowIsMobile}>Обсудить проект</Button>
+          <Button outline>Обсудить проект</Button>
         </div>
       </div>
     </div>
@@ -102,7 +97,7 @@
 
   .logo {
     flex-shrink: 0;
-
+    width: 200px;
     @include scr.tablet-and-lower {
       :global svg {
         width: 148px;
@@ -207,6 +202,7 @@
   }
 
   .mobile-menu {
+    width: 100%;
     @include scr.tablet-and-lower {
       position: fixed;
       left: 0;
@@ -233,23 +229,24 @@
     }
 
     > div {
-      position: absolute;
-      right: 0;
-      top: 0;
-      background: var(--bg-color);
-      border-bottom-left-radius: 30px;
-      padding: 30px;
       display: flex;
+      width: 100%;
 
       justify-content: space-between;
       align-items: center;
       gap: 30px;
 
       transition-property: transform;
-        transition-duration: var(--transition-duration);
-      width: 100%;
+      transition-duration: var(--transition-duration);
 
       @include scr.tablet-and-lower {
+        position: absolute;
+        right: 0;
+        top: 0;
+        background: var(--bg-color);
+        border-bottom-left-radius: 30px;
+        padding: 30px;
+
         flex-direction: column;
         gap: 60px;
 

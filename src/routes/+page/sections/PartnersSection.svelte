@@ -21,6 +21,8 @@
 </section>
 
 <style lang="scss">
+  @use "$lib/scss/mixins/scr";
+
   h2 {
     margin: 0 0 60px;
   }
@@ -33,9 +35,12 @@
   a {
     display: flex;
     align-items: center;
-    :global svg {
-      max-width: 80px;
-      height: auto;
+
+    @include scr.tablet-and-lower {
+      :global svg {
+        max-width: 80px;
+        height: auto;
+      }
     }
   }
 </style>

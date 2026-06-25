@@ -39,6 +39,7 @@
 </main>
 
 <style lang="scss">
+  @use "$lib/scss/env";
   @use "$lib/scss/mixins/scr";
 
   main {
@@ -55,9 +56,14 @@
 
   .bottom-figure-section {
     position: relative;
+
     > :last-child {
       position: relative;
       z-index: 2;
+    }
+
+    @include scr.tablet-and-lower {
+      background: linear-gradient(rgba(env.$primary-color, 0) 20px, rgba(env.$primary-color, .2) 50px, rgba(env.$primary-color, .2) 90%, var(--primary-color));
     }
   }
 
@@ -73,5 +79,9 @@
   .bottom-page-figure {
     width: 100%;
     height: auto;
+
+    @include scr.tablet-and-lower {
+      display: none;
+    }
   }
 </style>

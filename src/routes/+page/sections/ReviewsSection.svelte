@@ -114,7 +114,7 @@
   </article>
 {/snippet}
 <section class="page-container">
-  <h2>Отзывы кли<span onmousedown={handlePrikol} ontouchstart={handlePrikolMobile}>е</span>нтов и партнеровнтов</h2>
+  <h2>Отзывы кли<span onmousedown={handlePrikol} ontouchstart={handlePrikolMobile}>е</span>нтов и партнеров</h2>
 
   <div class="content">
     <AutoScroller velocity={autoScrollerVelocity}>
@@ -168,6 +168,7 @@
 
     @include scr.tablet-and-lower {
       padding: 20px;
+      width: 100%;
     }
     .header {
       display: flex;
