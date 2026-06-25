@@ -79,7 +79,7 @@
 </script>
 
 {#snippet caseItem(_case)}
-  <article class="case" class:focused={_case.id == selectedCase.id} onclick={() => {selectCase(_case)}}>
+  <article class="case" class:focused={_case.id == selectedCase.id} onclick={() => {selectCase(_case)}} >
     <img src={_case.imgSrc} alt="" loading="lazy">
     <div class="content">
       <h3>{_case.title}</h3>
@@ -90,7 +90,7 @@
 <section id="cases" class="page-container">
   <div class="header">
     <h2>Кейсы</h2>
-    <a class="active" href="#">все кейсы →</a>
+    <a class="active" href="/">все кейсы →</a>
   </div>
 
   <div class="content">
@@ -118,7 +118,7 @@
             {selectedCase.description}
           </p>
 
-          <a class="active" href="#">подробнее →</a>
+          <a class="active" href="/">подробнее →</a>
         </div>
       {/key}
     </div>

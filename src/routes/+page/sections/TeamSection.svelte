@@ -44,7 +44,7 @@
 
 {#snippet memberCard(imgSrc, name, position)}
   <figure class="member">
-    <img src={imgSrc} alt="">
+    <img src={imgSrc} alt="" loading="lazyr">
     <figcaption>
       <h3>{name}</h3>
       <p>{position}</p>

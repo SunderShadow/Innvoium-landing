@@ -37,8 +37,8 @@
 
     <Button>Получить консультацию</Button>
     <p>
-      Нажимая на кнопку вы соглашаетесь с <a class="active" href="">политикой конфиденциальности</a> и даете согласие на
-      <a class="active" href="">обработку персональных данных</a>
+      Нажимая на кнопку вы соглашаетесь с <a class="active" href="/">политикой конфиденциальности</a> и даете согласие на
+      <a class="active" href="/">обработку персональных данных</a>
     </p>
   </form>
 </section>
@@ -124,54 +124,6 @@
       gap: 12px;
     }
 
-    .input {
-      position: relative;
-      width: 100%;
-
-      &:hover {
-        svg *[fill] {
-          fill: rgba(env.$primary-color, .5);
-        }
-
-        input {
-          border-color: rgba(env.$primary-color, .5);
-        }
-      }
-
-      &:focus-within {
-        svg *[fill] {
-          fill: var(--primary-color);
-        }
-
-        input {
-          border-color: var(--primary-color);
-        }
-      }
-
-      svg {
-        *[fill] {
-          transition: fill var(--transition-duration);
-        }
-      }
-
-      input {
-        width: 100%;
-        border-radius: 10rem;
-        padding: 18px 30px;
-        border: 1px solid transparent;
-        outline: none;
-        font: inherit;
-
-        transition: border var(--transition-duration);
-      }
-
-      svg {
-        position: absolute;
-        right: 20px;
-        top: 50%;
-        transform: translateY(-50%);
-      }
-    }
 
     h2, p {
       margin: 0;

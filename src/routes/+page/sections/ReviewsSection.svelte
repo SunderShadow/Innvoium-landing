@@ -96,7 +96,7 @@
 {#snippet comment()}
   <article>
     <div class="header">
-      <img src={avatarEnhanced.img.src} alt="">
+      <img src={avatarEnhanced.img.src} alt="" loading="lazy">
       <div class="name-project">
         <h3>Елизавета Красинская</h3>
         <div>Разработка лендинга</div>
