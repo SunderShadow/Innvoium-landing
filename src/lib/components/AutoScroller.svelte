@@ -104,7 +104,11 @@
   }
 
   onMount(() => {
-    gap = Number(getComputedStyle(container).getPropertyValue('--auto-scroller-gap').slice(0, -2))
+    if (getComputedStyle(container).getPropertyValue('--auto-scroller-gap') == '') {
+      gap = Number(getComputedStyle(container).gap.slice(0, -2))
+    } else {
+      gap = Number(getComputedStyle(container).getPropertyValue('--auto-scroller-gap').slice(0, -2))
+    }
 
     let childNodes = getContainerChildNodes()
     for (let i = 0; i < childNodes.length; i++) {

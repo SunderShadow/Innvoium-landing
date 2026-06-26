@@ -1,7 +1,9 @@
 <script lang="ts" module>
+  import type {Props as AutoScrollerProps} from "$lib/components/AutoScroller.svelte"
+
   import type {Snippet} from "svelte"
 
-  export type Props = {
+  export type Props = AutoScrollerProps & {
     perPage: number
     children: Snippet
   }
@@ -9,7 +11,6 @@
 <script lang="ts">
   import AutoScroller from "$lib/components/AutoScroller.svelte"
   import BezierEasing from "bezier-easing"
-  import {onMount} from "svelte"
 
   let container: HTMLDivElement = $state()!
 
@@ -35,17 +36,17 @@
     const scale = easing(Math.max(0.6, 1 - distance))
 
 
-
     el.style.setProperty('z-index', zIndex.toFixed())
     el.style.setProperty('transform', `scale(${scale.toString()})`)
   }
   let {
-    children
+    children,
+    ...restProps
   }: Props = $props()
 </script>
 
 <div class="perspective-wrapper">
-  <AutoScroller bind:container onscroll={calcPerspective}>
+  <AutoScroller {...restProps} bind:container onscroll={calcPerspective}>
     {@render children?.()}
   </AutoScroller>
 </div>
