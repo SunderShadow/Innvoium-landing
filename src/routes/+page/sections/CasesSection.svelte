@@ -2,6 +2,9 @@
   import caseThumb from "../assets/case-thumb.png?enhanced&format=webp"
   import CaseComponent, {type Case} from "$lib/components/CaseComponent.svelte"
   import {onMount} from "svelte"
+  import {browser} from "$app/env"
+  import * as Slider from "$lib/components/Slider.svelte"
+  import type {Options} from "@splidejs/svelte-splide"
 
   let cases: Case[] = [
     {
@@ -113,8 +116,31 @@
   let caseFull = $state(Array(cases.length).fill(false))
   let caseShrink = $state(Array(cases.length).fill(false))
 
+  const sliderOptions: Options = {
+    type: 'loop',
+    autoplay: true,
+    interval: 3000,
+    perPage: 1,
+    arrows: false,
+    gap: 10
+  }
+
+  let mobile = $state(false)
   onMount(() => {
-    requestAnimationFrame(() => {setCaseFocused(0)})
+    if (browser) {
+      mobile = window.screen.width < 1024
+      window.addEventListener('resize', () => {
+        mobile = window.screen.width < 1024
+
+        if (!mobile) {
+          requestAnimationFrame(() => {setCaseFocused(0)})
+        }
+      })
+    }
+
+    if (!mobile) {
+      requestAnimationFrame(() => {setCaseFocused(0)})
+    }
   })
 </script>
 
@@ -133,20 +159,31 @@
     <a class="active" href="/">все кейсы →</a>
   </div>
 
-  <div class="content">
-    <div bind:this={focusContainer}>
-    </div>
-    <div class="case-selection">
-      {#each cases as data, i (i)}
-        <div onclick={e => {setCaseFocused(i)}} bind:this={caseContainers[i]}>
-          <CaseComponent {data} full={caseFull[i]} shrink={caseShrink[i]}/>
-          {#if lastFocusComponentContainer == i || newFocusComponentI == i}
-            <CaseComponent active={newFocusComponentI == i} {data} />
-          {/if}
-        </div>
+  {#if mobile}
+    <Slider.default options={sliderOptions}>
+      {#each cases as data}
+        <Slider.Slide>
+          <CaseComponent {data} full/>
+        </Slider.Slide>
       {/each}
+    </Slider.default>
+  {:else}
+    <div class="content">
+      <div bind:this={focusContainer}>
+      </div>
+      <div class="case-selection">
+        {#each cases as data, i (i)}
+          <div onclick={e => {setCaseFocused(i)}} bind:this={caseContainers[i]}>
+            <CaseComponent {data} full={caseFull[i]} shrink={caseShrink[i]}/>
+            {#if lastFocusComponentContainer == i || newFocusComponentI == i}
+              <CaseComponent active={newFocusComponentI == i} {data} />
+            {/if}
+          </div>
+        {/each}
+      </div>
     </div>
-  </div>
+
+  {/if}
 </section>
 
 <style lang="scss">

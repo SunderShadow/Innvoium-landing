@@ -1,8 +1,9 @@
 <script lang="ts">
   // or only core styles
   import '@splidejs/svelte-splide/css/core';
-  import {Splide, SplideSlide, type Options} from "@splidejs/svelte-splide"
+  import {type Options} from "@splidejs/svelte-splide"
   import Button from "$lib/components/Button.svelte"
+  import * as Slider from "$lib/components/Slider.svelte"
 
   const splideOptions: Options = {
     type: 'loop',
@@ -37,26 +38,26 @@
   <h2>Услуги</h2>
 
   <div class="content">
-    <Splide options={splideOptions}>
-      <SplideSlide>
+    <Slider.default options={splideOptions}>
+      <Slider.Slide>
         {@render itemCard('Нейроворонки', 'Строим автоматизированные воронки продаж на базе ИИ', 3000, '#', true)}
-      </SplideSlide>
-      <SplideSlide>
+      </Slider.Slide>
+      <Slider.Slide>
         {@render itemCard('ИИ-интеграции', 'Внедрение ИИ в бизнес-процессы: умные чат-боты и ассистенты', 3000, '#')}
-      </SplideSlide>
-      <SplideSlide>
+      </Slider.Slide>
+      <Slider.Slide>
         {@render itemCard('CRM и другие системы', 'Настройка, интеграция и создание систем:  воронки продаж, напоминания и другое', 3000, '#')}
-      </SplideSlide>
-      <SplideSlide>
+      </Slider.Slide>
+      <Slider.Slide>
         {@render itemCard('Нейроворонки', 'Строим автоматизированные воронки продаж на базе ИИ', 3000, '#', true)}
-      </SplideSlide>
-      <SplideSlide>
+      </Slider.Slide>
+      <Slider.Slide>
         {@render itemCard('ИИ-интеграции', 'Внедрение ИИ в бизнес-процессы: умные чат-боты и ассистенты', 3000, '#')}
-      </SplideSlide>
-      <SplideSlide>
+      </Slider.Slide>
+      <Slider.Slide>
         {@render itemCard('CRM и другие системы', 'Настройка, интеграция и создание систем:  воронки продаж, напоминания и другое', 3000, '#')}
-      </SplideSlide>
-    </Splide>
+      </Slider.Slide>
+    </Slider.default>
   </div>
 
   <div class="btn">
@@ -85,91 +86,6 @@
     margin-right: auto;
   }
 
-  #services :global {
-
-    .splide__pagination {
-      gap: 10px;
-      margin-top: 20px;
-      margin-left: 0;
-      padding-left: 0;
-    }
-
-    .splide__arrows {
-      position: absolute;
-      top: 50%;
-      left: 0;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      transform: translateY(-50%);
-      z-index: 2;
-
-      .splide__arrow {
-        background-color: #FFF;
-        border-radius: 10rem;
-        width: 60px;
-        height: 60px;
-        border: none;
-        cursor: pointer;
-
-        svg {
-          width: 15px;
-
-          transition: fill var(--transition-duration);
-        }
-
-        transition: background-color var(--transition-duration);
-
-        &:hover {
-          background-color: rgba(env.$primary-color, .5);
-
-          svg {
-            fill: #FFF;
-          }
-        }
-        &:active {
-          background-color: rgba(env.$primary-color, .75);
-        }
-      }
-      .splide__arrow--prev {
-        transform: translateX(-50%) rotate(180deg);
-      }
-
-      .splide__arrow--next {
-        transform: translateX(50%);
-      }
-    }
-    .splide__pagination__page {
-      width: 20px;
-      height: 20px;
-      background-color: #dee0e7;
-      border-radius: 100%;
-      border: none;
-
-      cursor: pointer;
-
-      display: block;
-      transition-duration: var(--transition-duration);
-      transition-property: outline, background-color;
-      outline: 2px solid transparent;
-
-      @include scr.tablet-and-lower {
-        width: 12px;
-        height: 12px;
-
-        &.is-active {
-          outline-color: var(--primary-color);
-        }
-      }
-      &:hover {
-        background-color: var(--primary-color);
-      }
-
-      &.is-active {
-        background-color: var(--primary-color);
-      }
-    }
-  }
 
   article {
     position: relative;
