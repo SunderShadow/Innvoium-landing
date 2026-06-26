@@ -17,6 +17,9 @@ importers:
       '@sveltejs/enhanced-img':
         specifier: ^0.10.4
         version: 0.10.4(@sveltejs/vite-plugin-svelte@7.1.2(svelte@5.56.3)(vite@8.0.16(sass-embedded@1.100.0)(sass@1.100.0)))(rollup@4.62.0)(svelte@5.56.3)(vite@8.0.16(sass-embedded@1.100.0)(sass@1.100.0))
+      bezier-easing:
+        specifier: ^3.0.1
+        version: 3.0.1
       sass-embedded:
         specifier: ^1.100.0
         version: 1.100.0
@@ -874,6 +877,9 @@ packages:
   balanced-match@4.0.4:
     resolution: {integrity: sha512-BLrgEcRTwX2o6gGxGOCNyMvGSp35YofuYzw9h1IMTRmKqttAZZVU67bdb9Pr2vUHA8+j3i2tJfjO6C6+4myGTA==}
     engines: {node: 18 || 20 || >=22}
+
+  bezier-easing@3.0.1:
+    resolution: {integrity: sha512-vvvg10Anq7py0+KkIqlwJpUVdde9Z8kSzeUzAkQNYAJdA3mZnLG9r9ExdwtjcASCYER6UkNHdBNHHMnVimnU7A==}
 
   bindings@1.5.0:
     resolution: {integrity: sha512-p2q/t/mhvuOj/UeLlV6566GD/guowlr0hHxClI0W9m7MWYkL1F0hLo+0Aexs9HSPCtR1SXQ0TD3MMKrXZajbiQ==}
@@ -2071,6 +2077,8 @@ snapshots:
   axobject-query@4.1.0: {}
 
   balanced-match@4.0.4: {}
+
+  bezier-easing@3.0.1: {}
 
   bindings@1.5.0:
     dependencies:

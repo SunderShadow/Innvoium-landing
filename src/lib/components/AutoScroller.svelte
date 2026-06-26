@@ -1,7 +1,11 @@
 <script lang="ts" module>
   import type {Snippet} from "svelte"
 
+  export {default as Perspective} from "./AutoScroller/Perspective.svelte"
+
   export type Props = {
+    onscroll: Function
+    container?: HTMLElement
     velocity?: number
     children: Snippet
   }
@@ -10,18 +14,21 @@
   import {onMount} from "svelte"
 
   let {
+    onscroll,
+    container = $bindable()!,
     velocity = 1,
     children
   }: Props = $props()
 
-  let container: HTMLElement = $state()!
-
   let gap = 30 //px
 
   let autoScrollRun = false
-
+  let currentScroll = 0
   function infiniteScroll() {
-    if (container.getBoundingClientRect().left < nextLeftEl.getBoundingClientRect().right + gap) {
+    onscroll()
+    let ltr = currentScroll < container.scrollLeft
+    let rtl = currentScroll > container.scrollLeft
+    if (rtl && container.getBoundingClientRect().left < nextLeftEl.getBoundingClientRect().right + gap) {
       const lastChild = getContainerChildNodes()[getContainerChildNodes().length - 1]
 
       calcSkipDistance()
@@ -33,7 +40,7 @@
       lastChild.remove()
 
       container.scrollTo({left: scrollWidth})
-    } else if (container.getBoundingClientRect().right > nextRightEl.getBoundingClientRect().right + gap) {
+    } else if (ltr && container.getBoundingClientRect().right > nextRightEl.getBoundingClientRect().right + gap) {
       const firstChild = getContainerChildNodes()[0]
 
       calcSkipDistance()
@@ -97,19 +104,22 @@
   }
 
   onMount(() => {
-    gap = Number(getComputedStyle(container).gap.slice(0, -2))
+    gap = Number(getComputedStyle(container).getPropertyValue('--auto-scroller-gap').slice(0, -2))
 
     let childNodes = getContainerChildNodes()
     for (let i = 0; i < childNodes.length; i++) {
       container.append(childNodes[i].cloneNode(true))
     }
 
-    childNodes = getContainerChildNodes()
-    calcSkipDistance()
-    calcNextElementsWidth()
-    container.scrollTo({left: skippedDistance})
 
-    startAutoScroll()
+    requestAnimationFrame(() => {
+      calcNextElementsWidth()
+      calcSkipDistance()
+      currentScroll = skippedDistance
+      container.scrollTo({left: skippedDistance})
+
+      startAutoScroll()
+    })
   })
 </script>
 
@@ -117,9 +127,9 @@
     role="contentinfo"
     class="auto-scroller"
     bind:this={container}
+    onscroll={infiniteScroll}
     ontouchstart={stopAutoScroll}
     ontouchend={startAutoScroll}
-    onscroll={infiniteScroll}
     onmouseenter={stopAutoScroll}
     onmouseleave={startAutoScroll}
 >
@@ -131,7 +141,7 @@
   .auto-scroller {
     display: flex;
 
-    gap: 30px;
+    gap: var(--auto-scroller-gap, 30px);
     width: 100%;
     overflow: scroll;
     scrollbar-width: none;

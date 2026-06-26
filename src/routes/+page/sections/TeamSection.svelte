@@ -5,7 +5,7 @@
   import alisaLarinaEnhanced from "../assets/team-section/alisa-larina.png?enhanced&format=webp"
   import georgiySherbinEnhanced from "../assets/team-section/georgiy-sherbin.png?enhanced&format=webp"
   import {onMount, tick} from "svelte"
-  import AutoScroller from "$lib/components/AutoScroller.svelte"
+  import * as AutoScroller from "$lib/components/AutoScroller.svelte"
 
   let members: Member[] = $state([
     {
@@ -58,11 +58,11 @@
     <div>все проекты делали эти <span>люди</span></div>
   </div>
 
-  <AutoScroller velocity={-1}>
+  <AutoScroller.Perspective velocity={-1}>
     {#each members as member, i (i)}
       {@render memberCard(member.img, member.name, member.position)}
     {/each}
-  </AutoScroller>
+  </AutoScroller.Perspective>
 </section>
 
 <style lang="scss">
@@ -99,6 +99,7 @@
     align-items: center;
     text-align: center;
 
+    height: 400px;
     color: #FFF;
 
     margin: 0;
