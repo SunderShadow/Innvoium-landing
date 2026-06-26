@@ -25,7 +25,7 @@
   let autoScrollRun = false
   let currentScroll = 0
   function infiniteScroll() {
-    onscroll()
+    onscroll?.()
     let ltr = currentScroll < container.scrollLeft
     let rtl = currentScroll > container.scrollLeft
     if (rtl && container.getBoundingClientRect().left < nextLeftEl.getBoundingClientRect().right + gap) {

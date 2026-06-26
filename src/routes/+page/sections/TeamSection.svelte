@@ -66,6 +66,8 @@
 </section>
 
 <style lang="scss">
+  @use "$lib/scss/mixins/scr";
+
   section {
     padding-top: var(--section-padding-y);
     padding-bottom: var(--section-padding-y);
@@ -111,6 +113,10 @@
     border-radius: 30px;
     padding: 30px;
 
+    @include scr.tablet-and-lower {
+      height: 300px;
+      width: 320px;
+    }
     img {
       position: absolute;
       width: 100%;

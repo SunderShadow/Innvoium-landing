@@ -21,21 +21,21 @@
   <ServicesSection />
   <WorkProcessSection />
   <CasesSection />
-<!--  <PartnersSection />-->
+  <PartnersSection />
   <TeamSection />
-<!--  <ReviewsSection />-->
-<!--  <FAQSection />-->
-<!--  <div class="bottom-figure-section">-->
-<!--    <div class="bottom-figure-wrapper">-->
-<!--      <svg class="bottom-page-figure" width="1440" height="1272" viewBox="0 0 1440 1272" fill="none" xmlns="http://www.w3.org/2000/svg">-->
-<!--        <path d="M404.438 418.476L0 275.531V1272H1440V0L404.438 418.476Z" fill="#811FF1"/>-->
-<!--      </svg>-->
-<!--    </div>-->
+  <ReviewsSection />
+  <FAQSection />
+  <div class="bottom-figure-section">
+    <div class="bottom-figure-wrapper">
+      <svg class="bottom-page-figure" width="1440" height="1272" viewBox="0 0 1440 1272" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M404.438 418.476L0 275.531V1272H1440V0L404.438 418.476Z" fill="#811FF1"/>
+      </svg>
+    </div>
 
-<!--    <div>-->
-<!--      <ContactUsSection />-->
-<!--    </div>-->
-<!--  </div>-->
+    <div>
+      <ContactUsSection />
+    </div>
+  </div>
 </main>
 
 <style lang="scss">
