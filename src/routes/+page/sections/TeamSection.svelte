@@ -58,11 +58,11 @@
     <div>все проекты делали эти <span>люди</span></div>
   </div>
 
-  <AutoScroller.Perspective velocity={-1}>
+  <AutoScroller.default velocity={-1}>
     {#each members as member, i (i)}
       {@render memberCard(member.img, member.name, member.position)}
     {/each}
-  </AutoScroller.Perspective>
+  </AutoScroller.default>
 </section>
 
 <style lang="scss">
@@ -102,13 +102,14 @@
     text-align: center;
 
     height: 400px;
-    color: #FFF;
+    width: 100%;
 
     margin: 0;
 
+    color: #FFF;
+
     position: relative;
     aspect-ratio: 400 / 500;
-    width: 100%;
     max-width: 400px;
     border-radius: 30px;
     padding: 30px;
