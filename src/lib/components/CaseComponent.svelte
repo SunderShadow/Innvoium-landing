@@ -122,7 +122,6 @@
       font-size: 1.25rem;
       font-weight: 500;
       margin-bottom: 20px;
-      height: 2em;
     }
 
     > .content {
